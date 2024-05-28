@@ -1,40 +1,26 @@
+document.addEventListener('DOMContentLoaded', () => {
+    let homeScore = 0;
+    let guestScore = 0;
 
-let scoreEl = document.getElementById("score-el")
+    function updateScore(team, points) {
+        if (team === 'home') {
+            homeScore += points;
+            document.getElementById('home-score').textContent = homeScore;
+        } else if (team === 'guest') {
+            guestScore += points;
+            document.getElementById('guest-score').textContent = guestScore;
+        }
+    }
 
-let count = 0
+    function handleClick(event) {
+        const button = event.target.closest('.button');
+        if (!button) return;
+        
+        const team = button.getAttribute('data-team');
+        const points = parseInt(button.getAttribute('data-points'));
 
+        updateScore(team, points);
+    }
 
-function homeplusone() {
-    count += 1
-    scoreEl.textContent = count
-}
-
-function homeplustwo() {
-    count += 2
-    scoreEl.textContent = count
-}
-
-function homeplusthree() {
-    count += 3
-    scoreEl.textContent = count
-}
-
-let scoreEll = document.getElementById("score-ell")
-
-let count1 = 0
-
-
-function guestplusone() {
-    count1 += 1
-    scoreEll.textContent = count1
-}
-
-function guestplustwo() {
-    count1 += 2
-    scoreEll.textContent = count1
-}
-
-function guestplusthree() {
-    count1 += 3
-    scoreEll.textContent = count1
-}
+    document.body.addEventListener('click', handleClick);
+});
